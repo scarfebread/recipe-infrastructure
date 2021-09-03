@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  appDb:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: U9]zCd(-3Uk4~<|G
+    volumes:
+      - ./schema/recipe-application/:/docker-entrypoint-initdb.d
+  authDb:
+    image: postgres
+    restart: always
+    command: postgres -p 5433
+    ports:
+      - "5433:5433"
+    environment:
+      POSTGRES_PASSWORD: ya7bjrElZsWbWX7W5MGn
+    volumes:
+      - ./schema/recipe-auth/:/docker-entrypoint-initdb.d
+  redis:
+    image: "redis:alpine"
+    command: redis-server --requirepass e2XSpLoMfMJfgwdoP5eo
+    ports:
+      - "6379:6379"
